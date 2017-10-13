@@ -14,10 +14,10 @@ foreach ($site in $sites){
 					Write-Host "- Running: $($item.RunningInstances)"
 					Write-Host
 					$total++
-                }
-            }
-        }
-    }
-    $site.dispose()
+				}
+			}
+		}
+	}
+	$site.dispose()
 }
 Write-Host "$($total) workflows instances are running on this Farm!"
