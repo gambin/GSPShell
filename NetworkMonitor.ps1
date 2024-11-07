@@ -8,7 +8,7 @@ while ($i -lt $howManyCollects) {
     
     $i++
 
-    Write-Output "Starting the collection: $($i)"
+    Write-Output "Starting the collection: $i of $howManyCollects"
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
     # More details here: https://maxnilz.com/docs/004-network/003-tcp-connection-state/
@@ -28,7 +28,7 @@ while ($i -lt $howManyCollects) {
                     $dnsName = "DNS name not found"
                 # }
             } else {
-                if ($dnsName.Length > 1){
+                if ($dnsName.Length -gt 1){
                     $dnsName = $dnsName -join ","
                 }
             }
@@ -50,9 +50,6 @@ while ($i -lt $howManyCollects) {
 
     $connections | 
         Select Timestamp, LocalAddress, LocalPort, RemoteAddress, RemoteAddress_DNS, RemotePort, State, OwningProcess, ProcessName | 
-        # Format-Table |
-        # Out-String |
-        # Out-File -FilePath $logFile -Append
         Sort-Object -Property State -Descending |
         Export-Csv -Path $logFile -NoTypeInformation -Append
 
